@@ -1,0 +1,62 @@
+{
+  "name": "bookshelf-json-columns",
+  "version": "0.0.0",
+  "description": "Parse JSON columns with Bookshelf.js",
+  "license": "MIT",
+  "author": {
+    "name": "Ricardo Gama",
+    "email": "ricardo@seegno.com",
+    "url": "https://github.com/ricardogama"
+  },
+  "homepage": "https://github.com/seegno/bookshelf-json-columns",
+  "bugs": {
+    "url": "https://github.com/seegno/bookshelf-json-columns/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seegno/bookshelf-json-columns.git"
+  },
+  "main": "./dist/index.js",
+  "keywords": [
+    "bookshelf",
+    "parse",
+    "json",
+    "columns"
+  ],
+  "options": {
+    "changelog": "-o seegno -r bookshelf-json-columns --only-pulls --use-commit-body -t 'Changelog' --date-format '/ YYYY-MM-DD'",
+    "mocha": "--compilers js:babel/register --bail test"
+  },
+  "scripts": {
+    "build": "rm -rf dist/* && ./node_modules/.bin/babel src/ --out-dir dist/",
+    "changelog": "./node_modules/.bin/github-changes $npm_package_options_changelog",
+    "cover": "babel-node node_modules/isparta/bin/isparta cover --report html node_modules/mocha/bin/_mocha -- $npm_package_options_mocha",
+    "lint": "./node_modules/.bin/eslint src test",
+    "test": "./node_modules/.bin/mocha $npm_package_options_mocha"
+  },
+  "devDependencies": {
+    "babel": "5.6.14",
+    "babel-eslint": "4.1.5",
+    "bookshelf": "0.9.1",
+    "eslint": "1.10.1",
+    "eslint-config-seegno": "1.2.0",
+    "eslint-plugin-babel": "2.1.1",
+    "github-changes": "1.0.0",
+    "isparta": "3.5.3",
+    "knex": "0.9.0",
+    "mocha": "2.2.5",
+    "pg": "4.4.3",
+    "pre-commit": "1.1.2",
+    "should": "7.1.1",
+    "sinon": "1.17.2"
+  },
+  "engines": {
+    "iojs": ">= 1.0.0",
+    "node": ">= 0.10"
+  },
+  "pre-commit": {
+    "run": [
+      "lint"
+    ]
+  }
+}
