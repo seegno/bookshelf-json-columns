@@ -1,0 +1,13 @@
+
+/**
+ * Export `knexfile`.
+ */
+
+export default {
+  client: 'postgres',
+  connection: {
+    charset: 'utf8',
+    database: 'bookshelf-json-columns',
+    host: 'localhost'
+  }
+};
