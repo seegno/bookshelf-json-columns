@@ -24,12 +24,12 @@
     "columns"
   ],
   "options": {
-    "changelog": "-o seegno -r bookshelf-json-columns --only-pulls --use-commit-body -t 'Changelog' --date-format '/ YYYY-MM-DD'",
+    "changelog": "-o seegno -r bookshelf-json-columns --only-pulls --use-commit-body -t 'Changelog'",
     "mocha": "--compilers js:babel/register --bail test"
   },
   "scripts": {
     "build": "rm -rf dist/* && ./node_modules/.bin/babel src/ --out-dir dist/",
-    "changelog": "./node_modules/.bin/github-changes $npm_package_options_changelog",
+    "changelog": "./node_modules/.bin/github-changes $npm_package_options_changelog --date-format '/ YYYY-MM-DD'",
     "cover": "babel-node node_modules/isparta/bin/isparta cover --report html node_modules/mocha/bin/_mocha -- $npm_package_options_mocha",
     "lint": "./node_modules/.bin/eslint src test",
     "test": "./node_modules/.bin/mocha $npm_package_options_mocha"
