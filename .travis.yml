@@ -1,5 +1,9 @@
 language: node_js
 
+before_script:
+  - cp test/knexfile.js.dist test/knexfile.js
+  - psql -U postgres -c 'create database "bookshelf-json-columns";'
+
 node_js:
  - "0.10"
  - "4"
