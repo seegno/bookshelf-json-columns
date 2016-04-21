@@ -1,7 +1,15 @@
 # Changelog
 
-## [1.0.0](https://github.com/seegno/bookshelf-json-columns/tree/1.0.0)
+## [1.0.1](https://github.com/seegno/bookshelf-json-columns/tree/1.0.1)
 
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.0.0...1.0.1)
+
+**Merged pull requests:**
+
+- Update lint script to only check staged files [\#13](https://github.com/seegno/bookshelf-json-columns/pull/13) ([ricardogama](https://github.com/ricardogama))
+- Add isparta options [\#12](https://github.com/seegno/bookshelf-json-columns/pull/12) ([ricardogama](https://github.com/ricardogama))
+
+## [1.0.0](https://github.com/seegno/bookshelf-json-columns/tree/1.0.0) (2016-04-21)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/0.1.0...1.0.0)
 
 **Closed issues:**
