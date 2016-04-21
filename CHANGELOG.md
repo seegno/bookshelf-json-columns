@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/seegno/bookshelf-json-columns/tree/1.0.0)
+
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/0.1.0...1.0.0)
+
+**Closed issues:**
+
+- Supporting JSON Arrays [\#7](https://github.com/seegno/bookshelf-json-columns/issues/7)
+- Unable to get plugin working [\#6](https://github.com/seegno/bookshelf-json-columns/issues/6)
+
+**Merged pull requests:**
+
+- Add initialize method extension note to README.md [\#11](https://github.com/seegno/bookshelf-json-columns/pull/11) ([ricardogama](https://github.com/ricardogama))
+- Add coveralls [\#10](https://github.com/seegno/bookshelf-json-columns/pull/10) ([ricardogama](https://github.com/ricardogama))
+- Update changelog script [\#9](https://github.com/seegno/bookshelf-json-columns/pull/9) ([ricardogama](https://github.com/ricardogama))
+- Update eslint modules versions and configuration [\#8](https://github.com/seegno/bookshelf-json-columns/pull/8) ([ricardogama](https://github.com/ricardogama))
+
 ## [0.1.0](https://github.com/seegno/bookshelf-json-columns/tree/0.1.0) (2015-12-16)
 **Closed issues:**
 
