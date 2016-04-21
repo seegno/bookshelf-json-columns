@@ -32,7 +32,7 @@
     "changelog": "github_changelog_generator --bug-labels --enhancement-labels --header-label='# Changelog'",
     "coveralls": "npm run cover && cat ./test/coverage/lcov.info | coveralls",
     "cover": "babel-node node_modules/isparta/bin/isparta cover $npm_package_options_isparta _mocha -- $npm_package_options_mocha",
-    "lint": "eslint src test",
+    "lint": "git diff --cached --name-only --diff-filter=ACMRTUXB | grep -E '\\.(js)(\\..+)?$' | xargs eslint",
     "test": "mocha $npm_package_options_mocha"
   },
   "devDependencies": {
@@ -56,9 +56,7 @@
     "iojs": ">= 1.0.0",
     "node": ">= 0.10"
   },
-  "pre-commit": {
-    "run": [
-      "lint"
-    ]
-  }
+  "pre-commit": [
+    "lint"
+  ]
 }
