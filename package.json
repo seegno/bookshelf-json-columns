@@ -30,9 +30,10 @@
   "scripts": {
     "build": "rm -rf dist/* && ./node_modules/.bin/babel src/ --out-dir dist/",
     "changelog": "./node_modules/.bin/github-changes $npm_package_options_changelog --date-format '/ YYYY-MM-DD'",
-    "cover": "babel-node node_modules/isparta/bin/isparta cover --report html node_modules/mocha/bin/_mocha -- $npm_package_options_mocha",
-    "lint": "./node_modules/.bin/eslint src test",
-    "test": "./node_modules/.bin/mocha $npm_package_options_mocha"
+    "coveralls": "npm run cover && cat ./test/coverage/lcov.info | coveralls",
+    "cover": "babel-node node_modules/isparta/bin/isparta cover _mocha -- $npm_package_options_mocha",
+    "lint": "eslint src test",
+    "test": "mocha $npm_package_options_mocha"
   },
   "devDependencies": {
     "babel": "5.6.14",
@@ -42,6 +43,7 @@
     "eslint-config-seegno": "4.0.0",
     "eslint-plugin-babel": "3.2.0",
     "eslint-plugin-sort-class-members": "1.0.1",
+    "coveralls": "2.11.9",
     "github-changes": "1.0.0",
     "isparta": "3.5.3",
     "knex": "0.9.0",
