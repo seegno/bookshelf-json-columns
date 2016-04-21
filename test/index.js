@@ -22,7 +22,7 @@ describe('bookshelf-json-columns', () => {
 
   before(async () => {
     await repository.knex.schema.dropTableIfExists('test');
-    await repository.knex.schema.createTable('test', (table) => {
+    await repository.knex.schema.createTable('test', table => {
       table.increments('id').primary();
       table.json('foo');
       table.string('qux');
