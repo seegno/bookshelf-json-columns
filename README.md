@@ -34,6 +34,22 @@ bookshelf.Model.extend({
 });
 ```
 
+**NOTE:** This plugin extends the `initialize` method of Bookshelf's `Model`, so if you are also extending or overriding it on your models make sure to call its prototype after your work is done:
+
+```js
+bookshelf.Model.extend({
+  initialize: function() {
+    // Do some stuff.
+    store.addModel(this);
+
+    // Call the initialize prototype method.
+    bookshelf.Model.prototype.initialize.apply(this, arguments);
+  },
+  jsonColumns: ['foo'],
+  tableName: 'bar'
+});
+```
+
 ## Contributing
 
 Feel free to fork this repository and submit pull requests. To run the tests, duplicate the `test/knexfile.js.dist` file, update it to your needs and run:
