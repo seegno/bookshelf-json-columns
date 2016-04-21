@@ -24,12 +24,11 @@
     "columns"
   ],
   "options": {
-    "changelog": "-o seegno -r bookshelf-json-columns --only-pulls --use-commit-body -t 'Changelog'",
     "mocha": "--compilers js:babel/register --bail test"
   },
   "scripts": {
     "build": "rm -rf dist/* && ./node_modules/.bin/babel src/ --out-dir dist/",
-    "changelog": "./node_modules/.bin/github-changes $npm_package_options_changelog --date-format '/ YYYY-MM-DD'",
+    "changelog": "github_changelog_generator --bug-labels --enhancement-labels --header-label='# Changelog'",
     "coveralls": "npm run cover && cat ./test/coverage/lcov.info | coveralls",
     "cover": "babel-node node_modules/isparta/bin/isparta cover _mocha -- $npm_package_options_mocha",
     "lint": "eslint src test",
@@ -44,7 +43,6 @@
     "eslint-plugin-babel": "3.2.0",
     "eslint-plugin-sort-class-members": "1.0.1",
     "coveralls": "2.11.9",
-    "github-changes": "1.0.0",
     "isparta": "3.5.3",
     "knex": "0.9.0",
     "mocha": "2.2.5",
