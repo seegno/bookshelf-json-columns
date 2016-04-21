@@ -24,13 +24,14 @@
     "columns"
   ],
   "options": {
+    "isparta": "--dir test/coverage",
     "mocha": "--compilers js:babel/register --bail test"
   },
   "scripts": {
     "build": "rm -rf dist/* && ./node_modules/.bin/babel src/ --out-dir dist/",
     "changelog": "github_changelog_generator --bug-labels --enhancement-labels --header-label='# Changelog'",
     "coveralls": "npm run cover && cat ./test/coverage/lcov.info | coveralls",
-    "cover": "babel-node node_modules/isparta/bin/isparta cover _mocha -- $npm_package_options_mocha",
+    "cover": "babel-node node_modules/isparta/bin/isparta cover $npm_package_options_isparta _mocha -- $npm_package_options_mocha",
     "lint": "eslint src test",
     "test": "mocha $npm_package_options_mocha"
   },
