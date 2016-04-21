@@ -1,2 +1,0 @@
-extends: 'eslint-config-seegno'
-parser: 'babel-eslint'

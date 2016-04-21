@@ -3,7 +3,7 @@
  * Export `bookshelf-json-columns` plugin.
  */
 
-export default (Bookshelf) => {
+export default Bookshelf => {
   const Model = Bookshelf.Model.prototype;
 
   Bookshelf.Model = Bookshelf.Model.extend({
@@ -14,7 +14,7 @@ export default (Bookshelf) => {
 
       // Stringify JSON columns before saving.
       this.on('saving', () => {
-        this.jsonColumns.forEach((column) => {
+        this.jsonColumns.forEach(column => {
           if (this.attributes[column]) {
             this.attributes[column] = JSON.stringify(this.attributes[column]);
           }
@@ -23,7 +23,7 @@ export default (Bookshelf) => {
 
       // Parse JSON columns after saving.
       this.on('saved', () => {
-        this.jsonColumns.forEach((column) => {
+        this.jsonColumns.forEach(column => {
           if (this.attributes[column]) {
             this.attributes[column] = JSON.parse(this.attributes[column]);
           }
