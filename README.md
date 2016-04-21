@@ -1,6 +1,10 @@
-# bookshelf-json-columns [![npm version][npm-image]][npm-url] [![build status][travis-image]][travis-url]
+# bookshelf-json-columns
 
 This [Bookshelf.js](https://github.com/tgriesser/bookshelf) plugin enables you to define which model columns have JSON format, stringifying its values before saving and parsing afterwards. It's recommended to use it with the `postgres` client, since bookshelf does not have schema information and doesn't know when to use `::json` building the knex queries. Through a simple configuration, there's no need to manually define hooks for each model with JSON columns.
+
+## Status
+
+[![npm version][npm-image]][npm-url] [![build status][travis-image]][travis-url] [![coverage status][coveralls-image]][coveralls-url]
 
 ## Installation
 
@@ -42,6 +46,8 @@ $ npm test
 
 MIT
 
+[coveralls-image]: https://coveralls.io/repos/github/seegno/bookshelf-json-columns/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/seegno/bookshelf-json-columns?branch=master
 [npm-image]: https://img.shields.io/npm/v/bookshelf-json-columns.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/bookshelf-json-columns
 [travis-image]: https://img.shields.io/travis/seegno/bookshelf-json-columns.svg?style=flat-square
