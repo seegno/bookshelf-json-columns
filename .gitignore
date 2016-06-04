@@ -1,3 +1,5 @@
-coverage
-node_modules
-test/knexfile.js
+/node_modules
+/test.sqlite3
+/test/coverage
+/test/postgres/knexfile.js
+/test/sqlite/knexfile.js
