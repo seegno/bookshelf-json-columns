@@ -39,18 +39,19 @@
     "babel": "5.6.14",
     "babel-eslint": "6.0.3",
     "bookshelf": "0.9.1",
+    "coveralls": "2.11.9",
     "eslint": "2.8.0",
     "eslint-config-seegno": "4.0.0",
     "eslint-plugin-babel": "3.2.0",
     "eslint-plugin-sort-class-members": "1.0.1",
-    "coveralls": "2.11.9",
     "isparta": "3.5.3",
     "knex": "0.9.0",
     "mocha": "2.2.5",
     "pg": "4.4.3",
     "pre-commit": "1.1.2",
     "should": "7.1.1",
-    "sinon": "1.17.2"
+    "sinon": "1.17.2",
+    "sqlite3": "3.1.3"
   },
   "engines": {
     "iojs": ">= 1.0.0",
