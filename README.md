@@ -66,5 +66,5 @@ MIT
 [coveralls-url]: https://coveralls.io/github/seegno/bookshelf-json-columns?branch=master
 [npm-image]: https://img.shields.io/npm/v/bookshelf-json-columns.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/bookshelf-json-columns
-[travis-image]: https://img.shields.io/travis/seegno/bookshelf-json-columns.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/seegno/bookshelf-json-columns/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/seegno/bookshelf-json-columns
