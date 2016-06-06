@@ -3,6 +3,22 @@
  * Export `bookshelf-json-columns` plugin.
  */
 
+function parse() {
+  this.jsonColumns.forEach(column => {
+    if (this.attributes[column]) {
+      this.attributes[column] = JSON.parse(this.attributes[column]);
+    }
+  });
+}
+
+function stringify() {
+  this.jsonColumns.forEach(column => {
+    if (this.attributes[column]) {
+      this.attributes[column] = JSON.stringify(this.attributes[column]);
+    }
+  });
+}
+
 export default Bookshelf => {
   const Model = Bookshelf.Model.prototype;
 
@@ -13,20 +29,15 @@ export default Bookshelf => {
       }
 
       // Stringify JSON columns before saving.
-      this.on('saving', () => {
-        this.jsonColumns.forEach(column => {
-          if (this.attributes[column]) {
-            this.attributes[column] = JSON.stringify(this.attributes[column]);
-          }
-        });
-      });
+      this.on('saving', stringify.bind(this));
 
-      // Parse JSON columns after saving.
-      this.on('saved', () => {
-        this.jsonColumns.forEach(column => {
-          if (this.attributes[column]) {
-            this.attributes[column] = JSON.parse(this.attributes[column]);
-          }
+      // Parse JSON columns after saving and after fetched.
+      this.on('saved fetched', parse.bind(this));
+
+      // Parse JSON after collection is fetched.
+      this.on('fetched:collection', collection => {
+        collection.models.forEach(model => {
+          parse.apply(model);
         });
       });
 
