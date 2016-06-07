@@ -1,0 +1,11 @@
+
+/**
+ * Export SQLite knexfile.
+ */
+
+export default {
+  client: 'sqlite',
+  connection: {
+    filename: './test.sqlite3'
+  }
+};

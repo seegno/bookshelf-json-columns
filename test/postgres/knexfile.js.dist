@@ -1,6 +1,6 @@
 
 /**
- * Export `knexfile`.
+ * Export PostgreSQL knexfile.
  */
 
 export default {
