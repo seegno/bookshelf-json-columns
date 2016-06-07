@@ -1,7 +1,20 @@
 # Changelog
 
-## [1.0.1](https://github.com/seegno/bookshelf-json-columns/tree/1.0.1)
+## [1.1.0](https://github.com/seegno/bookshelf-json-columns/tree/1.1.0)
 
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.0.1...1.1.0)
+
+**Closed issues:**
+
+- What is this plugin for [\#15](https://github.com/seegno/bookshelf-json-columns/issues/15)
+
+**Merged pull requests:**
+
+- Add master branch to travis image url [\#18](https://github.com/seegno/bookshelf-json-columns/pull/18) ([ricardogama](https://github.com/ricardogama))
+- Add JSON columns parsing with SQLite client [\#17](https://github.com/seegno/bookshelf-json-columns/pull/17) ([ricardogama](https://github.com/ricardogama))
+- Update coveralls image badge to square [\#14](https://github.com/seegno/bookshelf-json-columns/pull/14) ([ruimarinho](https://github.com/ruimarinho))
+
+## [1.0.1](https://github.com/seegno/bookshelf-json-columns/tree/1.0.1) (2016-04-21)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.0.0...1.0.1)
 
 **Merged pull requests:**
