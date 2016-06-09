@@ -52,15 +52,40 @@ bookshelf.Model.extend({
 
 ## Contributing
 
-Feel free to fork this repository and submit pull requests. To run the tests, duplicate the *test/knexfile.js.dist* file, update it to your needs and run:
+Contributions are welcome and greatly appreciated, so feel free to fork this repository and submit pull requests.  
+
+**bookshelf-json-columns** supports PostgreSQL and SQLite3. You can find test suites for each of these database engines in the **test/postgres** and **test/sqlite** folders.
+
+### Setting up
+
+- Fork and clone the **bookshelf-json-columns** repository.
+- Duplicate *test/postgres/knexfile.js.dist* and *test/sqlite/knexfile.js.dist* files and update it to your needs.
+- Make sure all the tests pass:
 
 ```sh
 $ npm test
 ```
 
+### Linting
+
+**bookshelf-json-columns** enforces linting using [ESLint](http://eslint.org/) with the [Seegno-flavored ESLint config](https://github.com/seegno/eslint-config-seegno). We recommend you to install an eslint plugin in your editor of choice, although you can run the linter anytime with:
+
+```sh
+$ eslint src test
+```
+
+### Pull Request
+
+Please follow these advices to simplify the pull request workflow:
+
+- If you add or enhance functionality, an update of *README.md* usage section should be part of the PR.  
+- If your PR fixes a bug you should include tests that at least fail before your code changes and pass after.  
+- Keep your branch rebased and fix all conflicts before submitting.  
+- Make sure Travis build status is ok.
+
 ## License
 
-MIT
+[MIT](https://opensource.org/licenses/MIT)
 
 [coveralls-image]: https://img.shields.io/coveralls/seegno/bookshelf-json-columns/master.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/github/seegno/bookshelf-json-columns?branch=master
