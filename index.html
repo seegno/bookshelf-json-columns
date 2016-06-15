@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Bookshelf-json-columns by seegno</title>
+    <title>bookshelf-json-columns by seegno</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,7 +11,7 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">Bookshelf-json-columns</h1>
+      <h1 class="project-name">bookshelf-json-columns</h1>
       <h2 class="project-tagline">Parse JSON columns with Bookshelf.js</h2>
       <a href="https://github.com/seegno/bookshelf-json-columns" class="btn">View on GitHub</a>
       <a href="https://github.com/seegno/bookshelf-json-columns/zipball/master" class="btn">Download .zip</a>
@@ -20,14 +20,14 @@
 
     <section class="main-content">
       <h2>
-<a id="status" class="anchor" href="#status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Status</h2>
-
-<p><a href="https://npmjs.org/package/bookshelf-json-columns"><img src="https://img.shields.io/npm/v/bookshelf-json-columns.svg?style=flat-square" alt="npm version"></a> <a href="https://travis-ci.org/seegno/bookshelf-json-columns"><img src="https://img.shields.io/travis/seegno/bookshelf-json-columns.svg?style=flat-square" alt="build status"></a> <a href="https://coveralls.io/github/seegno/bookshelf-json-columns?branch=master"><img src="https://coveralls.io/repos/github/seegno/bookshelf-json-columns/badge.svg?branch=master" alt="coverage status"></a></p>
-
-<h2>
 <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview</h2>
 
-<p>This <a href="https://github.com/tgriesser/bookshelf">Bookshelf.js</a> plugin enables you to define which model columns have JSON format, stringifying its values before saving and parsing afterwards. It's recommended to use it with the <code>postgres</code> client, since bookshelf does not have schema information and doesn't know when to use <code>::json</code> building the knex queries. Through a simple configuration, there's no need to manually define hooks for each model with JSON columns.</p>
+<p>This <a href="https://github.com/tgriesser/bookshelf">Bookshelf.js</a> plugin enables you to define which model columns have JSON format, preventing manual hook definition for each model with JSON columns.</p>
+
+<h2>
+<a id="status" class="anchor" href="#status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Status</h2>
+
+<p><a href="https://npmjs.org/package/bookshelf-json-columns"><img src="https://img.shields.io/npm/v/bookshelf-json-columns.svg?style=flat-square" alt="npm version"></a> <a href="https://travis-ci.org/seegno/bookshelf-json-columns"><img src="https://img.shields.io/travis/seegno/bookshelf-json-columns/master.svg?style=flat-square" alt="build status"></a> <a href="https://coveralls.io/github/seegno/bookshelf-json-columns?branch=master"><img src="https://img.shields.io/coveralls/seegno/bookshelf-json-columns/master.svg?style=flat-square" alt="coverage status"></a></p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
@@ -39,7 +39,7 @@
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>Require and register the <code>bookshelf-json-columns</code> plugin:</p>
+<p>Require and register the <strong>bookshelf-json-columns</strong> plugin:</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> bookshelf <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>bookshelf<span class="pl-pds">'</span></span>)(knex);
 <span class="pl-k">var</span> jsonColumns <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>bookshelf-json-columns<span class="pl-pds">'</span></span>);
@@ -61,7 +61,7 @@
     <span class="pl-smi">store</span>.<span class="pl-en">addModel</span>(<span class="pl-v">this</span>);
 
     <span class="pl-c">// Call the initialize prototype method.</span>
-    <span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-c1">prototype</span>.<span class="pl-smi">initialize</span>.<span class="pl-c1">apply</span>(<span class="pl-v">this</span>, arguments);
+    <span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-c1">prototype</span>.<span class="pl-smi">initialize</span>.<span class="pl-c1">apply</span>(<span class="pl-v">this</span>, <span class="pl-v">arguments</span>);
   },
   jsonColumns<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>],
   tableName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>
@@ -70,17 +70,50 @@
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
 
-<p>Feel free to fork this repository and submit pull requests. To run the tests, duplicate the <code>test/knexfile.js.dist</code> file, update it to your needs and run:</p>
+<p>Contributions are welcome and greatly appreciated, so feel free to fork this repository and submit pull requests.  </p>
+
+<p><strong>bookshelf-json-columns</strong> supports PostgreSQL and SQLite3. You can find test suites for each of these database engines in the <strong>test/postgres</strong> and <strong>test/sqlite</strong> folders.</p>
+
+<h3>
+<a id="setting-up" class="anchor" href="#setting-up" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up</h3>
+
+<ul>
+<li>Fork and clone the <strong>bookshelf-json-columns</strong> repository.</li>
+<li>Duplicate <em>test/postgres/knexfile.js.dist</em> and <em>test/sqlite/knexfile.js.dist</em> files and update it to your needs.</li>
+<li>Make sure all the tests pass:</li>
+</ul>
 
 <div class="highlight highlight-source-shell"><pre>$ npm <span class="pl-c1">test</span></pre></div>
+
+<h3>
+<a id="linting" class="anchor" href="#linting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Linting</h3>
+
+<p><strong>bookshelf-json-columns</strong> enforces linting using <a href="http://eslint.org/">ESLint</a> with the <a href="https://github.com/seegno/eslint-config-seegno">Seegno-flavored ESLint config</a>. We recommend you to install an eslint plugin in your editor of choice, although you can run the linter anytime with:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ eslint src <span class="pl-c1">test</span></pre></div>
+
+<h3>
+<a id="pull-request" class="anchor" href="#pull-request" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pull Request</h3>
+
+<p>Please follow these advices to simplify the pull request workflow:</p>
+
+<ul>
+<li>If you add or enhance functionality, an update of <em>README.md</em> usage section should be part of the PR.<br>
+</li>
+<li>If your PR fixes a bug you should include tests that at least fail before your code changes and pass after.<br>
+</li>
+<li>Keep your branch rebased and fix all conflicts before submitting.<br>
+</li>
+<li>Make sure Travis build status is ok.</li>
+</ul>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
-<p>MIT</p>
+<p><a href="https://opensource.org/licenses/MIT">MIT</a></p>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/seegno/bookshelf-json-columns">Bookshelf-json-columns</a> is maintained by <a href="https://github.com/seegno">seegno</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/seegno/bookshelf-json-columns">bookshelf-json-columns</a> is maintained by <a href="https://github.com/seegno">seegno</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
