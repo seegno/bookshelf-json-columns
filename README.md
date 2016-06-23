@@ -54,12 +54,12 @@ bookshelf.Model.extend({
 
 Contributions are welcome and greatly appreciated, so feel free to fork this repository and submit pull requests.  
 
-**bookshelf-json-columns** supports PostgreSQL and SQLite3. You can find test suites for each of these database engines in the **test/postgres** and **test/sqlite** folders.
+**bookshelf-json-columns** supports PostgreSQL and SQLite3. You can find test suites for each of these database engines in the *test/postgres* and *test/sqlite* folders.
 
 ### Setting up
 
 - Fork and clone the **bookshelf-json-columns** repository.
-- Duplicate *test/postgres/knexfile.js.dist* and *test/sqlite/knexfile.js.dist* files and update it to your needs.
+- Duplicate *test/postgres/knexfile.js.dist* and *test/sqlite/knexfile.js.dist* files and update them to your needs.
 - Make sure all the tests pass:
 
 ```sh
