@@ -52,7 +52,7 @@ export default Bookshelf => {
     }
   });
 
-  if (client === 'sqlite' || client === 'sqlite'3) {
+  if (client === 'sqlite' || client === 'sqlite3') {
     const Collection = Bookshelf.Collection.prototype;
 
     Bookshelf.Collection = Bookshelf.Collection.extend({
