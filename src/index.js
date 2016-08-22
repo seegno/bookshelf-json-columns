@@ -43,7 +43,7 @@ export default Bookshelf => {
       // Parse JSON columns after model is saved.
       this.on('saved', parse.bind(this));
 
-      if (client === 'sqlite') {
+      if (client === 'sqlite' || client === 'sqlite3') {
         // Parse JSON columns after model is fetched.
         this.on('fetched', parse.bind(this));
       }
@@ -52,7 +52,7 @@ export default Bookshelf => {
     }
   });
 
-  if (client === 'sqlite') {
+  if (client === 'sqlite' || client === 'sqlite3') {
     const Collection = Bookshelf.Collection.prototype;
 
     Bookshelf.Collection = Bookshelf.Collection.extend({
