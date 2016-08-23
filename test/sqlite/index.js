@@ -41,7 +41,7 @@ describe('with SQLite client', () => {
       const model = await Model.forge().save({ foo: ['bar'] });
       const fetched = await Model.forge({ id: model.get('id') }).fetch();
 
-      should(fetched.get('foo')).be.null()
+      should(fetched.get('foo')).be.null();
     });
 
     it('should not save a valid JSON value creating through a collection', async () => {
@@ -62,7 +62,7 @@ describe('with SQLite client', () => {
 
       const fetched = await Model.forge({ id: model.get('id') }).fetch();
 
-      should(fetched.get('foo')).be.null()
+      should(fetched.get('foo')).be.null();
     });
 
     it('should not override model prototype initialize method', async () => {
@@ -98,7 +98,13 @@ describe('with SQLite client', () => {
       fetched.get('foo').should.eql(['bar']);
     });
 
-    it('should keep a json value creating through a collection', async () => {
+    it('should keep the json value using save with a key and value', async () => {
+      const model = await Model.forge().save('foo', ['bar'], { method: 'insert' });
+
+      model.get('foo').should.eql(['bar']);
+    });
+
+    it('should keep a json value when creating through a collection', async () => {
       const Collection = repository.Collection.extend({ model: Model });
       const collection = Collection.forge();
 
@@ -134,6 +140,14 @@ describe('with SQLite client', () => {
       const fetched = await Model.forge({ id: model.get('id') }).fetch();
 
       should(fetched.get('foo')).be.null();
+    });
+
+    it('should keep a json value when updating with `patch` option', async () => {
+      const model = await Model.forge().save();
+
+      await model.save({ foo: ['bar'] }, { patch: true });
+
+      model.get('foo').should.eql(['bar']);
     });
 
     it('should keep a json value when updating other columns', async () => {

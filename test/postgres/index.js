@@ -93,7 +93,13 @@ describe('with PostgreSQL client', () => {
       model.get('foo').should.eql(['bar']);
     });
 
-    it('should keep a json value creating through a collection', async () => {
+    it('should keep the json value using save with a key and value', async () => {
+      const model = await Model.forge().save('foo', ['bar'], { method: 'insert' });
+
+      model.get('foo').should.eql(['bar']);
+    });
+
+    it('should keep a json value when creating through a collection', async () => {
       const Collection = repository.Collection.extend({ model: Model });
       const collection = Collection.forge();
 
@@ -122,6 +128,14 @@ describe('with PostgreSQL client', () => {
       await model.save();
 
       should(model.get('foo')).be.undefined();
+    });
+
+    it('should keep a json value when updating with `patch` option', async () => {
+      const model = await Model.forge().save();
+
+      await model.save({ foo: ['bar'] }, { patch: true });
+
+      model.get('foo').should.eql(['bar']);
     });
 
     it('should keep a json value when updating other columns', async () => {

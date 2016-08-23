@@ -3,7 +3,12 @@
  * Stringify JSON columns.
  */
 
-function stringify() {
+function stringify(model, attributes, options) {
+  // Do not stringify with `patch` option.
+  if (options && options.patch) {
+    return;
+  }
+
   this.jsonColumns.forEach(column => {
     if (this.attributes[column]) {
       this.attributes[column] = JSON.stringify(this.attributes[column]);
@@ -15,7 +20,12 @@ function stringify() {
  * Parse JSON columns.
  */
 
-function parse() {
+function parse(model, response, options) {
+  // Do not parse with `patch` option.
+  if (options && options.patch) {
+    return;
+  }
+
   this.jsonColumns.forEach(column => {
     if (this.attributes[column]) {
       this.attributes[column] = JSON.parse(this.attributes[column]);
@@ -49,6 +59,46 @@ export default Bookshelf => {
       }
 
       return Model.initialize.apply(this, arguments);
+    },
+    save(key, value, options) {
+      if (!this.jsonColumns) {
+        return Model.save.apply(this, arguments);
+      }
+
+      // Handle arguments as Bookshelf.
+      let attributes;
+
+      if (key === null || typeof key === 'object') {
+        attributes = key || {};
+        options = value ? { ...value } : {};
+      } else {
+        (attributes = {})[key] = value;
+        options = options ? { ...options } : {};
+      }
+
+      // Only handle arguments with `patch` option.
+      if (!options.patch) {
+        return Model.save.apply(this, arguments);
+      }
+
+      // Stringify JSON columns.
+      Object.keys(attributes).forEach(attribute => {
+        if (this.jsonColumns.includes(attribute)) {
+          attributes[attribute] = JSON.stringify(attributes[attribute]);
+        }
+      });
+
+      return Model.save.call(this, attributes, options)
+        .then(model => {
+          // Parse JSON columns.
+          Object.keys(attributes).forEach(attribute => {
+            if (this.jsonColumns.includes(attribute)) {
+              model.attributes[attribute] = JSON.parse(model.attributes[attribute]);
+            }
+          });
+
+          return model;
+        });
     }
   });
 
@@ -72,4 +122,4 @@ export default Bookshelf => {
       }
     });
   }
-}
+};
