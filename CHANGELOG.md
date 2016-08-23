@@ -1,7 +1,22 @@
 # Changelog
 
-## [1.1.0](https://github.com/seegno/bookshelf-json-columns/tree/1.1.0)
+## [1.1.1](https://github.com/seegno/bookshelf-json-columns/tree/HEAD)
 
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.1.0...1.1.1)
+
+**Closed issues:**
+
+- Add Bookshelf as peer dependency [\#21](https://github.com/seegno/bookshelf-json-columns/issues/21)
+- Improve documentation contributing section [\#19](https://github.com/seegno/bookshelf-json-columns/issues/19)
+
+**Merged pull requests:**
+
+- adding support for sqlite3 [\#26](https://github.com/seegno/bookshelf-json-columns/pull/26) ([csepulv](https://github.com/csepulv))
+- Add bookshelf as peer dependency [\#23](https://github.com/seegno/bookshelf-json-columns/pull/23) ([ricardogama](https://github.com/ricardogama))
+- Fix typo and files notation on README.md [\#22](https://github.com/seegno/bookshelf-json-columns/pull/22) ([ricardogama](https://github.com/ricardogama))
+- Improve contributing section [\#20](https://github.com/seegno/bookshelf-json-columns/pull/20) ([abelsoares](https://github.com/abelsoares))
+
+## [1.1.0](https://github.com/seegno/bookshelf-json-columns/tree/1.1.0) (2016-06-07)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.0.1...1.1.0)
 
 **Closed issues:**
