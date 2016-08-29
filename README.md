@@ -34,7 +34,7 @@ bookshelf.Model.extend({
 });
 ```
 
-**NOTE:** This plugin extends the `initialize` method of Bookshelf's `Model`, so if you are also extending or overriding it on your models make sure to call its prototype after your work is done:
+**NOTE:** This plugin extends the `initialize` and `save` methods of Bookshelf's `Model`, so if you are also extending or overriding them on your models make sure to call their prototype after your work is done:
 
 ```js
 bookshelf.Model.extend({
@@ -42,10 +42,17 @@ bookshelf.Model.extend({
     // Do some stuff.
     store.addModel(this);
 
-    // Call the initialize prototype method.
+    // Call the `initialize` prototype method.
     bookshelf.Model.prototype.initialize.apply(this, arguments);
   },
   jsonColumns: ['foo'],
+  save: function() {
+    // Do some stuff.
+    store.validateModel(this);
+
+    // Call the `save` prototype method.
+    bookshelf.Model.prototype.save.apply(this, arguments);
+  },
   tableName: 'bar'
 });
 ```
