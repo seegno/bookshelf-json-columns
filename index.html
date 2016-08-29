@@ -53,17 +53,24 @@
   tableName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>biz<span class="pl-pds">'</span></span>
 });</pre></div>
 
-<p><strong>NOTE:</strong> This plugin extends the <code>initialize</code> method of Bookshelf's <code>Model</code>, so if you are also extending or overriding it on your models make sure to call its prototype after your work is done:</p>
+<p><strong>NOTE:</strong> This plugin extends the <code>initialize</code> and <code>save</code> methods of Bookshelf's <code>Model</code>, so if you are also extending or overriding them on your models make sure to call their prototype after your work is done:</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-en">extend</span>({
   <span class="pl-en">initialize</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
     <span class="pl-c">// Do some stuff.</span>
     <span class="pl-smi">store</span>.<span class="pl-en">addModel</span>(<span class="pl-v">this</span>);
 
-    <span class="pl-c">// Call the initialize prototype method.</span>
+    <span class="pl-c">// Call the `initialize` prototype method.</span>
     <span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-c1">prototype</span>.<span class="pl-smi">initialize</span>.<span class="pl-c1">apply</span>(<span class="pl-v">this</span>, <span class="pl-v">arguments</span>);
   },
   jsonColumns<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>],
+  <span class="pl-en">save</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+    <span class="pl-c">// Do some stuff.</span>
+    <span class="pl-smi">store</span>.<span class="pl-en">validateModel</span>(<span class="pl-v">this</span>);
+
+    <span class="pl-c">// Call the `save` prototype method.</span>
+    <span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-c1">prototype</span>.<span class="pl-smi">save</span>.<span class="pl-c1">apply</span>(<span class="pl-v">this</span>, <span class="pl-v">arguments</span>);
+  },
   tableName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>
 });</pre></div>
 
@@ -72,14 +79,14 @@
 
 <p>Contributions are welcome and greatly appreciated, so feel free to fork this repository and submit pull requests.  </p>
 
-<p><strong>bookshelf-json-columns</strong> supports PostgreSQL and SQLite3. You can find test suites for each of these database engines in the <strong>test/postgres</strong> and <strong>test/sqlite</strong> folders.</p>
+<p><strong>bookshelf-json-columns</strong> supports PostgreSQL and SQLite3. You can find test suites for each of these database engines in the <em>test/postgres</em> and <em>test/sqlite</em> folders.</p>
 
 <h3>
 <a id="setting-up" class="anchor" href="#setting-up" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up</h3>
 
 <ul>
 <li>Fork and clone the <strong>bookshelf-json-columns</strong> repository.</li>
-<li>Duplicate <em>test/postgres/knexfile.js.dist</em> and <em>test/sqlite/knexfile.js.dist</em> files and update it to your needs.</li>
+<li>Duplicate <em>test/postgres/knexfile.js.dist</em> and <em>test/sqlite/knexfile.js.dist</em> files and update them to your needs.</li>
 <li>Make sure all the tests pass:</li>
 </ul>
 
