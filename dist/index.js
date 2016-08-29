@@ -8,8 +8,16 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-function stringify() {
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function stringify(model, attributes, options) {
   var _this = this;
+
+  // Do not stringify with `patch` option.
+  if (options && options.patch) {
+    return;
+  }
 
   this.jsonColumns.forEach(function (column) {
     if (_this.attributes[column]) {
@@ -22,8 +30,13 @@ function stringify() {
  * Parse JSON columns.
  */
 
-function parse() {
+function parse(model, response, options) {
   var _this2 = this;
+
+  // Do not parse with `patch` option.
+  if (options && options.patch) {
+    return;
+  }
 
   this.jsonColumns.forEach(function (column) {
     if (_this2.attributes[column]) {
@@ -58,6 +71,47 @@ exports['default'] = function (Bookshelf) {
       }
 
       return Model.initialize.apply(this, arguments);
+    },
+    save: function save(key, value, options) {
+      var _this3 = this;
+
+      if (!this.jsonColumns) {
+        return Model.save.apply(this, arguments);
+      }
+
+      // Handle arguments as Bookshelf.
+      var attributes = undefined;
+
+      if (key === null || typeof key === 'object') {
+        attributes = key || {};
+        options = value ? _extends({}, value) : {};
+      } else {
+        (attributes = {})[key] = value;
+        options = options ? _extends({}, options) : {};
+      }
+
+      // Only handle arguments with `patch` option.
+      if (!options.patch) {
+        return Model.save.apply(this, arguments);
+      }
+
+      // Stringify JSON columns.
+      Object.keys(attributes).forEach(function (attribute) {
+        if (_this3.jsonColumns.includes(attribute)) {
+          attributes[attribute] = JSON.stringify(attributes[attribute]);
+        }
+      });
+
+      return Model.save.call(this, attributes, options).then(function (model) {
+        // Parse JSON columns.
+        Object.keys(attributes).forEach(function (attribute) {
+          if (_this3.jsonColumns.includes(attribute)) {
+            model.attributes[attribute] = JSON.parse(model.attributes[attribute]);
+          }
+        });
+
+        return model;
+      });
     }
   });
 

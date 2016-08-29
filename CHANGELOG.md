@@ -1,7 +1,18 @@
 # Changelog
 
-## [1.1.1](https://github.com/seegno/bookshelf-json-columns/tree/HEAD)
+## [1.2.0](https://github.com/seegno/bookshelf-json-columns/tree/HEAD)
 
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.1.1...1.2.0)
+
+**Closed issues:**
+
+- Working for updates? [\#25](https://github.com/seegno/bookshelf-json-columns/issues/25)
+
+**Merged pull requests:**
+
+- Add support for update with patch option [\#27](https://github.com/seegno/bookshelf-json-columns/pull/27) ([ricardogama](https://github.com/ricardogama))
+
+## [1.1.1](https://github.com/seegno/bookshelf-json-columns/tree/1.1.1) (2016-08-23)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.1.0...1.1.1)
 
 **Closed issues:**
