@@ -1,15 +1,30 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Stringify JSON columns.
  */
-
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function stringify(model, attributes, options) {
   var _this = this;
@@ -21,7 +36,7 @@ function stringify(model, attributes, options) {
 
   this.jsonColumns.forEach(function (column) {
     if (_this.attributes[column]) {
-      _this.attributes[column] = JSON.stringify(_this.attributes[column]);
+      _this.attributes[column] = (0, _stringify2.default)(_this.attributes[column]);
     }
   });
 }
@@ -49,7 +64,7 @@ function parse(model, response, options) {
  * Export `bookshelf-json-columns` plugin.
  */
 
-exports['default'] = function (Bookshelf) {
+exports.default = function (Bookshelf) {
   var Model = Bookshelf.Model.prototype;
   var client = Bookshelf.knex.client.config.client;
 
@@ -80,14 +95,14 @@ exports['default'] = function (Bookshelf) {
       }
 
       // Handle arguments as Bookshelf.
-      var attributes = undefined;
+      var attributes = void 0;
 
-      if (key === null || typeof key === 'object') {
+      if (key === null || (typeof key === 'undefined' ? 'undefined' : (0, _typeof3.default)(key)) === 'object') {
         attributes = key || {};
-        options = value ? _extends({}, value) : {};
+        options = value ? (0, _extends3.default)({}, value) : {};
       } else {
         (attributes = {})[key] = value;
-        options = options ? _extends({}, options) : {};
+        options = options ? (0, _extends3.default)({}, options) : {};
       }
 
       // Only handle arguments with `patch` option.
@@ -96,16 +111,16 @@ exports['default'] = function (Bookshelf) {
       }
 
       // Stringify JSON columns.
-      Object.keys(attributes).forEach(function (attribute) {
-        if (_this3.jsonColumns.includes(attribute)) {
-          attributes[attribute] = JSON.stringify(attributes[attribute]);
+      (0, _keys2.default)(attributes).forEach(function (attribute) {
+        if (_this3.jsonColumns.indexOf(attribute) !== -1) {
+          attributes[attribute] = (0, _stringify2.default)(attributes[attribute]);
         }
       });
 
       return Model.save.call(this, attributes, options).then(function (model) {
         // Parse JSON columns.
-        Object.keys(attributes).forEach(function (attribute) {
-          if (_this3.jsonColumns.includes(attribute)) {
+        (0, _keys2.default)(attributes).forEach(function (attribute) {
+          if (_this3.jsonColumns.indexOf(attribute) !== -1) {
             model.attributes[attribute] = JSON.parse(model.attributes[attribute]);
           }
         });

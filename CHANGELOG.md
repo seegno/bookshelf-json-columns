@@ -1,7 +1,19 @@
 # Changelog
 
-## [1.2.0](https://github.com/seegno/bookshelf-json-columns/tree/HEAD)
+## [1.2.1](https://github.com/seegno/bookshelf-json-columns/tree/HEAD)
 
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.2.0...1.2.1)
+
+**Closed issues:**
+
+- `array.includes` is undefined in non-ES2015 environments [\#28](https://github.com/seegno/bookshelf-json-columns/issues/28)
+
+**Merged pull requests:**
+
+- Update eslint version [\#30](https://github.com/seegno/bookshelf-json-columns/pull/30) ([ricardogama](https://github.com/ricardogama))
+- Add babel-plugin-array-includes [\#29](https://github.com/seegno/bookshelf-json-columns/pull/29) ([ricardogama](https://github.com/ricardogama))
+
+## [1.2.0](https://github.com/seegno/bookshelf-json-columns/tree/1.2.0) (2016-08-29)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.1.1...1.2.0)
 
 **Closed issues:**
