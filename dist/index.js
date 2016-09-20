@@ -112,7 +112,7 @@ exports.default = function (Bookshelf) {
 
       // Stringify JSON columns.
       (0, _keys2.default)(attributes).forEach(function (attribute) {
-        if (_this3.jsonColumns.indexOf(attribute) !== -1) {
+        if (_this3.jsonColumns.indexOf(attribute) !== -1 && attributes[attribute]) {
           attributes[attribute] = (0, _stringify2.default)(attributes[attribute]);
         }
       });

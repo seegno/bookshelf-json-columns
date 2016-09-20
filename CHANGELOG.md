@@ -1,7 +1,18 @@
 # Changelog
 
-## [1.2.1](https://github.com/seegno/bookshelf-json-columns/tree/HEAD)
+## [1.2.2](https://github.com/seegno/bookshelf-json-columns/tree/1.2.2)
 
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.2.1...1.2.2)
+
+**Closed issues:**
+
+- issue when saving a null value [\#31](https://github.com/seegno/bookshelf-json-columns/issues/31)
+
+**Merged pull requests:**
+
+- Fix stringifying null values with patch option [\#32](https://github.com/seegno/bookshelf-json-columns/pull/32) ([ricardogama](https://github.com/ricardogama))
+
+## [1.2.1](https://github.com/seegno/bookshelf-json-columns/tree/1.2.1) (2016-08-29)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.2.0...1.2.1)
 
 **Closed issues:**
