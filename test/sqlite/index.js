@@ -142,6 +142,19 @@ describe('with SQLite client', () => {
       should(fetched.get('foo')).be.null();
     });
 
+    it('should not stringify null values on update with `patch` option', async () => {
+      sinon.spy(ModelPrototype, 'save');
+
+      const model = await Model.forge().save();
+
+      await model.save({ foo: null }, { patch: true });
+
+      ModelPrototype.save.callCount.should.equal(2);
+      ModelPrototype.save.secondCall.args[0].should.eql({ foo: null });
+
+      sinon.restore(ModelPrototype);
+    });
+
     it('should keep a json value when updating with `patch` option', async () => {
       const model = await Model.forge().save();
 
