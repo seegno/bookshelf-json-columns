@@ -9,7 +9,6 @@ before_script:
   - psql -U postgres -c 'create database "bookshelf-json-columns";'
 
 node_js:
-  - "0.10"
   - "4"
   - "5"
   - "6"
