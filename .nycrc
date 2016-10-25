@@ -1,0 +1,9 @@
+{
+  "instrument": false,
+  "report-dir": "test/coverage",
+  "reporter": [
+    "html",
+    "text-summary"
+  ],
+  "sourceMap": false
+}
