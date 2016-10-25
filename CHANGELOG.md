@@ -1,7 +1,24 @@
 # Changelog
 
-## [1.2.2](https://github.com/seegno/bookshelf-json-columns/tree/1.2.2)
+## [2.0.0](https://github.com/seegno/bookshelf-json-columns/tree/2.0.0) (2016-10-25)
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.2.2...2.0.0)
 
+**Closed issues:**
+
+- Idea: automatic string to Date conversion [\#34](https://github.com/seegno/bookshelf-json-columns/issues/34)
+
+**Merged pull requests:**
+
+- Add .nycrc to .npmignore [\#40](https://github.com/seegno/bookshelf-json-columns/pull/40) ([ricardogama](https://github.com/ricardogama))
+- Remove knex client duplicate condition [\#39](https://github.com/seegno/bookshelf-json-columns/pull/39) ([ricardogama](https://github.com/ricardogama))
+- Add node version badge [\#38](https://github.com/seegno/bookshelf-json-columns/pull/38) ([ricardogama](https://github.com/ricardogama))
+- Add .npmignore [\#37](https://github.com/seegno/bookshelf-json-columns/pull/37) ([abelsoares](https://github.com/abelsoares))
+- Update dependencies versions [\#36](https://github.com/seegno/bookshelf-json-columns/pull/36) ([ricardogama](https://github.com/ricardogama))
+- Update jsonColumns option to be a class property [\#35](https://github.com/seegno/bookshelf-json-columns/pull/35) ([ricardogama](https://github.com/ricardogama))
+- Test against Node.js 6 [\#33](https://github.com/seegno/bookshelf-json-columns/pull/33) ([MarkHerhold](https://github.com/MarkHerhold))
+- Add release script [\#24](https://github.com/seegno/bookshelf-json-columns/pull/24) ([ricardogama](https://github.com/ricardogama))
+
+## [1.2.2](https://github.com/seegno/bookshelf-json-columns/tree/1.2.2) (2016-09-20)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.2.1...1.2.2)
 
 **Closed issues:**

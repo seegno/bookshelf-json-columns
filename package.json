@@ -1,6 +1,6 @@
 {
   "name": "bookshelf-json-columns",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "description": "Parse JSON columns with Bookshelf.js",
   "license": "MIT",
   "author": {
