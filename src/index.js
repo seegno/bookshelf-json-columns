@@ -40,6 +40,7 @@ function parse(model, response, options) {
 export default Bookshelf => {
   const Model = Bookshelf.Model.prototype;
   const client = Bookshelf.knex.client.config.client;
+  const parseOnFetch = client === 'sqlite' || client === 'sqlite3';
 
   Bookshelf.Model = Bookshelf.Model.extend({
     initialize() {
@@ -53,7 +54,7 @@ export default Bookshelf => {
       // Parse JSON columns after model is saved.
       this.on('saved', parse.bind(this));
 
-      if (client === 'sqlite' || client === 'sqlite3') {
+      if (parseOnFetch) {
         // Parse JSON columns after model is fetched.
         this.on('fetched', parse.bind(this));
       }
@@ -102,24 +103,26 @@ export default Bookshelf => {
     }
   });
 
-  if (client === 'sqlite' || client === 'sqlite3') {
-    const Collection = Bookshelf.Collection.prototype;
+  if (!parseOnFetch) {
+    return;
+  }
 
-    Bookshelf.Collection = Bookshelf.Collection.extend({
-      initialize() {
-        if (!this.model.jsonColumns) {
-          return Collection.initialize.apply(this, arguments);
-        }
+  const Collection = Bookshelf.Collection.prototype;
 
-        // Parse JSON columns after collection is fetched.
-        this.on('fetched', collection => {
-          collection.models.forEach(model => {
-            parse.apply(model);
-          });
-        });
-
+  Bookshelf.Collection = Bookshelf.Collection.extend({
+    initialize() {
+      if (!this.model.jsonColumns) {
         return Collection.initialize.apply(this, arguments);
       }
-    });
-  }
+
+      // Parse JSON columns after collection is fetched.
+      this.on('fetched', collection => {
+        collection.models.forEach(model => {
+          parse.apply(model);
+        });
+      });
+
+      return Collection.initialize.apply(this, arguments);
+    }
+  });
 };
