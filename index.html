@@ -27,7 +27,7 @@
 <h2>
 <a id="status" class="anchor" href="#status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Status</h2>
 
-<p><a href="https://npmjs.org/package/bookshelf-json-columns"><img src="https://img.shields.io/npm/v/bookshelf-json-columns.svg?style=flat-square" alt="npm version"></a> <a href="https://travis-ci.org/seegno/bookshelf-json-columns"><img src="https://img.shields.io/travis/seegno/bookshelf-json-columns/master.svg?style=flat-square" alt="build status"></a> <a href="https://coveralls.io/github/seegno/bookshelf-json-columns?branch=master"><img src="https://img.shields.io/coveralls/seegno/bookshelf-json-columns/master.svg?style=flat-square" alt="coverage status"></a></p>
+<p><a href="https://npmjs.org/package/bookshelf-json-columns"><img src="https://img.shields.io/npm/v/bookshelf-json-columns.svg?style=flat-square" alt="npm version"></a> <img src="https://img.shields.io/node/v/bookshelf-json-columns.svg?style=flat-square" alt="node version"> <a href="https://travis-ci.org/seegno/bookshelf-json-columns"><img src="https://img.shields.io/travis/seegno/bookshelf-json-columns/master.svg?style=flat-square" alt="build status"></a> <a href="https://coveralls.io/github/seegno/bookshelf-json-columns?branch=master"><img src="https://img.shields.io/coveralls/seegno/bookshelf-json-columns/master.svg?style=flat-square" alt="coverage status"></a></p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
@@ -46,14 +46,25 @@
 
 <span class="pl-smi">bookshelf</span>.<span class="pl-en">plugin</span>(jsonColumns);</pre></div>
 
-<p>Define which columns have JSON format with the <code>jsonColumns</code> prototype property:</p>
+<p>Define which columns have JSON format with the <code>jsonColumns</code> class property:</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-en">extend</span>({
-  jsonColumns<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>],
-  tableName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>biz<span class="pl-pds">'</span></span>
+  tableName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>
+}, {
+  jsonColumns<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>biz<span class="pl-pds">'</span></span>]
 });</pre></div>
 
-<p><strong>NOTE:</strong> This plugin extends the <code>initialize</code> and <code>save</code> methods of Bookshelf's <code>Model</code>, so if you are also extending or overriding them on your models make sure to call their prototype after your work is done:</p>
+<p>If you're using ES6 class syntax, define <code>jsonColumns</code> as static property:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">class</span> <span class="pl-en">Model</span> <span class="pl-k">extends</span> <span class="pl-e">bookshelf</span>.<span class="pl-smi">Model</span> {
+  get <span class="pl-en">tableName</span>() {
+    <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>;
+  }
+
+  <span class="pl-k">static</span> jsonColumns <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>biz<span class="pl-pds">'</span></span>];
+}</pre></div>
+
+<p>This plugin extends the <code>initialize</code> and <code>save</code> methods of Bookshelf's <code>Model</code>, so if you are also extending or overriding them on your models make sure to call their prototype after your work is done:</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-en">extend</span>({
   <span class="pl-en">initialize</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
@@ -63,7 +74,6 @@
     <span class="pl-c">// Call the `initialize` prototype method.</span>
     <span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-c1">prototype</span>.<span class="pl-smi">initialize</span>.<span class="pl-c1">apply</span>(<span class="pl-v">this</span>, <span class="pl-v">arguments</span>);
   },
-  jsonColumns<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>],
   <span class="pl-en">save</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
     <span class="pl-c">// Do some stuff.</span>
     <span class="pl-smi">store</span>.<span class="pl-en">validateModel</span>(<span class="pl-v">this</span>);
@@ -71,7 +81,9 @@
     <span class="pl-c">// Call the `save` prototype method.</span>
     <span class="pl-smi">bookshelf</span>.<span class="pl-smi">Model</span>.<span class="pl-c1">prototype</span>.<span class="pl-smi">save</span>.<span class="pl-c1">apply</span>(<span class="pl-v">this</span>, <span class="pl-v">arguments</span>);
   },
-  tableName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>
+  tableName<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>
+}, {
+  jsonColumns<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>biz<span class="pl-pds">'</span></span>]
 });</pre></div>
 
 <h2>
