@@ -1,0 +1,6 @@
+/.babelrc
+/.eslintrc.yml
+/.travis.yml
+/src
+/test
+/test.sqlite3
