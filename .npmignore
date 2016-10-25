@@ -1,5 +1,6 @@
 /.babelrc
 /.eslintrc.yml
+/.nycrc
 /.travis.yml
 /src
 /test
