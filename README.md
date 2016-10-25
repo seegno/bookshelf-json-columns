@@ -25,16 +25,29 @@ var jsonColumns = require('bookshelf-json-columns');
 bookshelf.plugin(jsonColumns);
 ```
 
-Define which columns have JSON format with the `jsonColumns` prototype property:
+Define which columns have JSON format with the `jsonColumns` class property:
 
 ```js
 bookshelf.Model.extend({
-  jsonColumns: ['foo', 'bar'],
-  tableName: 'biz'
+  tableName: 'foo'
+}, {
+  jsonColumns: ['bar', 'biz']
 });
 ```
 
-**NOTE:** This plugin extends the `initialize` and `save` methods of Bookshelf's `Model`, so if you are also extending or overriding them on your models make sure to call their prototype after your work is done:
+If you're using ES6 class syntax, define `jsonColumns` as static property:
+
+```js
+class Model extends bookshelf.Model {
+  get tableName() {
+    return 'foo';
+  }
+
+  static jsonColumns = ['bar', 'biz'];
+}
+```
+
+This plugin extends the `initialize` and `save` methods of Bookshelf's `Model`, so if you are also extending or overriding them on your models make sure to call their prototype after your work is done:
 
 ```js
 bookshelf.Model.extend({
@@ -45,7 +58,6 @@ bookshelf.Model.extend({
     // Call the `initialize` prototype method.
     bookshelf.Model.prototype.initialize.apply(this, arguments);
   },
-  jsonColumns: ['foo'],
   save: function() {
     // Do some stuff.
     store.validateModel(this);
@@ -53,7 +65,9 @@ bookshelf.Model.extend({
     // Call the `save` prototype method.
     bookshelf.Model.prototype.save.apply(this, arguments);
   },
-  tableName: 'bar'
+  tableName: 'foo'
+}, {
+  jsonColumns: ['bar', 'biz']
 });
 ```
 

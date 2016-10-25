@@ -85,7 +85,7 @@ describe('with PostgreSQL client', () => {
   });
 
   describe('when a json column is registered', () => {
-    const Model = repository.Model.extend({ jsonColumns: ['foo'], tableName: 'test' });
+    const Model = repository.Model.extend({ tableName: 'test' }, { jsonColumns: ['foo'] });
 
     it('should keep the json value on create', async () => {
       const model = await Model.forge().save({ foo: ['bar'] });

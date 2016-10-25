@@ -9,7 +9,7 @@ function stringify(model, attributes, options) {
     return;
   }
 
-  this.jsonColumns.forEach(column => {
+  this.constructor.jsonColumns.forEach(column => {
     if (this.attributes[column]) {
       this.attributes[column] = JSON.stringify(this.attributes[column]);
     }
@@ -26,7 +26,7 @@ function parse(model, response, options) {
     return;
   }
 
-  this.jsonColumns.forEach(column => {
+  this.constructor.jsonColumns.forEach(column => {
     if (this.attributes[column]) {
       this.attributes[column] = JSON.parse(this.attributes[column]);
     }
@@ -43,7 +43,7 @@ export default Bookshelf => {
 
   Bookshelf.Model = Bookshelf.Model.extend({
     initialize() {
-      if (!this.jsonColumns) {
+      if (!this.constructor.jsonColumns) {
         return Model.initialize.apply(this, arguments);
       }
 
@@ -61,7 +61,7 @@ export default Bookshelf => {
       return Model.initialize.apply(this, arguments);
     },
     save(key, value, options) {
-      if (!this.jsonColumns) {
+      if (!this.constructor.jsonColumns) {
         return Model.save.apply(this, arguments);
       }
 
@@ -83,7 +83,7 @@ export default Bookshelf => {
 
       // Stringify JSON columns.
       Object.keys(attributes).forEach(attribute => {
-        if (this.jsonColumns.includes(attribute) && attributes[attribute]) {
+        if (this.constructor.jsonColumns.includes(attribute) && attributes[attribute]) {
           attributes[attribute] = JSON.stringify(attributes[attribute]);
         }
       });
@@ -92,7 +92,7 @@ export default Bookshelf => {
         .then(model => {
           // Parse JSON columns.
           Object.keys(attributes).forEach(attribute => {
-            if (this.jsonColumns.includes(attribute)) {
+            if (this.constructor.jsonColumns.includes(attribute)) {
               model.attributes[attribute] = JSON.parse(model.attributes[attribute]);
             }
           });
@@ -107,7 +107,7 @@ export default Bookshelf => {
 
     Bookshelf.Collection = Bookshelf.Collection.extend({
       initialize() {
-        if (!this.model.prototype.jsonColumns) {
+        if (!this.model.jsonColumns) {
           return Collection.initialize.apply(this, arguments);
         }
 
