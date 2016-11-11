@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.1](https://github.com/seegno/bookshelf-json-columns/tree/2.0.1) (2016-11-11)
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/2.0.0...2.0.1)
+
+**Closed issues:**
+
+- model.refresh is not working properly | bug [\#42](https://github.com/seegno/bookshelf-json-columns/issues/42)
+- Malformed array literal [\#41](https://github.com/seegno/bookshelf-json-columns/issues/41)
+
+**Merged pull requests:**
+
+- Add user to postgres knexfile [\#44](https://github.com/seegno/bookshelf-json-columns/pull/44) ([ricardogama](https://github.com/ricardogama))
+- Fix parsing on saving through query [\#43](https://github.com/seegno/bookshelf-json-columns/pull/43) ([ricardogama](https://github.com/ricardogama))
+
 ## [2.0.0](https://github.com/seegno/bookshelf-json-columns/tree/2.0.0) (2016-10-25)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/1.2.2...2.0.0)
 

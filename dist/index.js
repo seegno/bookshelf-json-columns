@@ -16,6 +16,9 @@ function stringify(model, attributes, options) {
     return;
   }
 
+  // Mark json columns as stringfied.
+  options.parseJsonColumns = true;
+
   this.constructor.jsonColumns.forEach(column => {
     if (this.attributes[column]) {
       this.attributes[column] = JSON.stringify(this.attributes[column]);
@@ -27,9 +30,17 @@ function stringify(model, attributes, options) {
  * Parse JSON columns.
  */
 
-function parse(model, response, options) {
+function parse(model, response) {
+  let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
   // Do not parse with `patch` option.
-  if (options && options.patch) {
+  if (options.patch) {
+    return;
+  }
+
+  // Do not parse on `fetched` event after saving.
+  // eslint-disable-next-line no-underscore-dangle
+  if (!options.parseJsonColumns && options.query && options.query._method !== 'select') {
     return;
   }
 
