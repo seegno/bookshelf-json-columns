@@ -3,13 +3,13 @@
  * Module dependencies.
  */
 
+import { clearTable, dropTable, recreateTable } from '../utils';
 import bookshelf from 'bookshelf';
 import jsonColumns from '../../src';
 import knex from 'knex';
 import knexfile from './knexfile';
 import should from 'should';
 import sinon from 'sinon';
-import { clearTable, dropTable, recreateTable } from '../utils';
 
 /**
  * Test `bookshelf-json-columns` plugin with SQLite client.
@@ -34,7 +34,7 @@ describe('with SQLite client', () => {
     await dropTable(repository);
   });
 
-  describe('when a json column is not registered', () => {
+  describe('when a JSON column is not registered', () => {
     const Model = repository.Model.extend({ tableName: 'test' });
 
     it('should not save a valid JSON value on create', async () => {
@@ -65,6 +65,14 @@ describe('with SQLite client', () => {
       should(fetched.get('foo')).be.null();
     });
 
+    it('should not parse a JSON value on fetch', async () => {
+      const model = await Model.forge().save({ foo: JSON.stringify(['bar']) });
+
+      await model.refresh();
+
+      model.get('foo').should.equal(JSON.stringify(['bar']));
+    });
+
     it('should not override model prototype initialize method', async () => {
       sinon.spy(ModelPrototype, 'initialize');
 
@@ -88,23 +96,23 @@ describe('with SQLite client', () => {
     });
   });
 
-  describe('when a json column is registered', () => {
+  describe('when a JSON column is registered', () => {
     const Model = repository.Model.extend({ tableName: 'test' }, { jsonColumns: ['foo'] });
 
-    it('should keep a json value on create', async () => {
+    it('should keep a JSON value on create', async () => {
       const model = await Model.forge().save({ foo: ['bar'] });
       const fetched = await Model.forge({ id: model.get('id') }).fetch();
 
       fetched.get('foo').should.eql(['bar']);
     });
 
-    it('should keep the json value using save with a key and value', async () => {
+    it('should keep the JSON value using save with a key and value', async () => {
       const model = await Model.forge().save('foo', ['bar'], { method: 'insert' });
 
       model.get('foo').should.eql(['bar']);
     });
 
-    it('should keep a json value when creating through a collection', async () => {
+    it('should keep a JSON value when creating through a collection', async () => {
       const Collection = repository.Collection.extend({ model: Model });
       const collection = Collection.forge();
 
@@ -122,7 +130,7 @@ describe('with SQLite client', () => {
       should(fetched.get('foo')).be.null();
     });
 
-    it('should keep a json value on update', async () => {
+    it('should keep a JSON value on update', async () => {
       const model = await Model.forge().save();
 
       await model.save({ foo: ['bar'] });
@@ -155,7 +163,7 @@ describe('with SQLite client', () => {
       sinon.restore(ModelPrototype);
     });
 
-    it('should keep a json value when updating with `patch` option', async () => {
+    it('should keep a JSON value when updating with `patch` option', async () => {
       const model = await Model.forge().save();
 
       await model.save({ foo: ['bar'] }, { patch: true });
@@ -163,7 +171,7 @@ describe('with SQLite client', () => {
       model.get('foo').should.eql(['bar']);
     });
 
-    it('should keep a json value when updating other columns', async () => {
+    it('should keep a JSON value when updating other columns', async () => {
       const model = await Model.forge().save({ foo: ['bar'] });
 
       await model.save({ qux: 'qix' }, { patch: true });
@@ -171,6 +179,24 @@ describe('with SQLite client', () => {
       const fetched = await Model.forge({ id: model.get('id') }).fetch();
 
       fetched.get('foo').should.eql(['bar']);
+    });
+
+    it('should keep a JSON value on fetch', async () => {
+      const model = await Model.forge().save({ foo: ['bar'] });
+
+      await model.refresh();
+
+      model.get('foo').should.eql(['bar']);
+    });
+
+    it('should keep a JSON value when updating through query', async () => {
+      const model = await Model.forge().save({ foo: ['bar'] });
+
+      model.query().update({ qux: 'qix' });
+
+      await model.refresh();
+
+      model.get('foo').should.eql(['bar']);
     });
 
     it('should not override model prototype initialize method', async () => {
