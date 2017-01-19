@@ -1,0 +1,14 @@
+
+/**
+ * Export MySQL knexfile.
+ */
+
+export default {
+  client: 'mysql',
+  connection: {
+    charset: 'utf8',
+    database: 'bookshelf-json-columns',
+    host: 'localhost',
+    user: 'root'
+  }
+};
