@@ -1,11 +1,16 @@
 language: node_js
 
+services:
+  - mysql
+
 addons:
   postgresql: "9.2"
 
 before_script:
+  - cp test/mysql/knexfile.js.dist test/mysql/knexfile.js
   - cp test/postgres/knexfile.js.dist test/postgres/knexfile.js
   - cp test/sqlite/knexfile.js.dist test/sqlite/knexfile.js
+  - mysql -e "create database \`bookshelf-json-columns\`;" -uroot
   - psql -U postgres -c 'create database "bookshelf-json-columns";'
 
 node_js:

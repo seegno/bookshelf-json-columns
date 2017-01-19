@@ -2,5 +2,6 @@
 /node_modules
 /test.sqlite3
 /test/coverage
+/test/mysql/knexfile.js
 /test/postgres/knexfile.js
 /test/sqlite/knexfile.js
