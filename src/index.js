@@ -49,7 +49,7 @@ function parse(model, response, options = {}) {
 export default Bookshelf => {
   const Model = Bookshelf.Model.prototype;
   const client = Bookshelf.knex.client.config.client;
-  const parseOnFetch = client === 'sqlite' || client === 'sqlite3';
+  const parseOnFetch = client === 'sqlite' || client === 'sqlite3' || client === 'mysql';
 
   Bookshelf.Model = Bookshelf.Model.extend({
     initialize() {
