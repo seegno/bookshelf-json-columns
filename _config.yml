@@ -1,0 +1,8 @@
+title: bookshelf-json-columns
+description: Parse JSON columns with Bookshelf.js
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
