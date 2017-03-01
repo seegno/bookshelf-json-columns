@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.1.0](https://github.com/seegno/bookshelf-json-columns/tree/2.1.0) (2017-03-01)
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/2.0.1...2.1.0)
+
+**Closed issues:**
+
+- Why is parse on fetch limited to sqlite? [\#46](https://github.com/seegno/bookshelf-json-columns/issues/46)
+
+**Merged pull requests:**
+
+- Stringify on save for MySQL [\#48](https://github.com/seegno/bookshelf-json-columns/pull/48) ([pandapaul](https://github.com/pandapaul))
+- Add support for MySQL [\#47](https://github.com/seegno/bookshelf-json-columns/pull/47) ([ricardogama](https://github.com/ricardogama))
+- Add lcov reporter to .nycrc [\#45](https://github.com/seegno/bookshelf-json-columns/pull/45) ([abelsoares](https://github.com/abelsoares))
+
 ## [2.0.1](https://github.com/seegno/bookshelf-json-columns/tree/2.0.1) (2016-11-11)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/2.0.0...2.0.1)
 
