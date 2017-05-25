@@ -4,5 +4,5 @@
  */
 
 import './mysql';
-// import './postgres';
-// import './sqlite';
+import './postgres';
+import './sqlite';
