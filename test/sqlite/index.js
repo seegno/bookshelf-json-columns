@@ -163,6 +163,16 @@ describe('with SQLite client', () => {
       sinon.restore(ModelPrototype);
     });
 
+    it('should keep an empty string on update with `patch` option', async () => {
+      sinon.spy(ModelPrototype, 'save');
+
+      const model = await Model.forge().save();
+
+      await model.save({ foo: '' }, { patch: true });
+
+      model.get('foo').should.equal('');
+    });
+
     it('should keep a JSON value when updating with `patch` option', async () => {
       const model = await Model.forge().save();
 

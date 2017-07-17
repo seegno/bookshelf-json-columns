@@ -140,17 +140,14 @@ describe('with MySQL client', () => {
       sinon.restore(ModelPrototype);
     });
 
-    it('should not stringify \'\' values on update with `patch` option', async () => {
+    it('should keep an empty string on update with `patch` option', async () => {
       sinon.spy(ModelPrototype, 'save');
 
       const model = await Model.forge().save();
 
       await model.save({ foo: '' }, { patch: true });
 
-      ModelPrototype.save.callCount.should.equal(2);
-      ModelPrototype.save.secondCall.args[0].should.eql({ foo: '' });
-
-      sinon.restore(ModelPrototype);
+      model.get('foo').should.equal('');
     });
 
     it('should keep a JSON value when updating with `patch` option', async () => {
