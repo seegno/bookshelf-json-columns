@@ -102,10 +102,8 @@ export default Bookshelf => {
         .then(model => {
           // Parse JSON columns.
           Object.keys(attributes).forEach(attribute => {
-            if (this.constructor.jsonColumns.includes(attribute)) {
-              if (model.attributes[attribute]) {
-                model.attributes[attribute] = JSON.parse(model.attributes[attribute]);                
-              }
+            if (this.constructor.jsonColumns.includes(attribute) && model.attributes[attribute]) {
+              model.attributes[attribute] = JSON.parse(model.attributes[attribute]);
             }
           });
 
