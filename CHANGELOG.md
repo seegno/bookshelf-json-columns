@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/seegno/bookshelf-json-columns/tree/2.1.1) (2017-07-18)
+[Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/2.1.0...2.1.1)
+
+**Merged pull requests:**
+
+- Fix parsing empty strings [\#50](https://github.com/seegno/bookshelf-json-columns/pull/50) ([zhongzhi107](https://github.com/zhongzhi107))
+
 ## [2.1.0](https://github.com/seegno/bookshelf-json-columns/tree/2.1.0) (2017-03-01)
 [Full Changelog](https://github.com/seegno/bookshelf-json-columns/compare/2.0.1...2.1.0)
 
