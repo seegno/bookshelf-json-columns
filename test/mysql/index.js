@@ -4,6 +4,7 @@
  */
 
 import { dropTable, recreateTable } from '../utils';
+import InvalidJSONError from '../../src/invalid-json-error';
 import bookshelf from 'bookshelf';
 import jsonColumns from '../../src';
 import knex from 'knex';
@@ -192,6 +193,63 @@ describe('with MySQL client', () => {
       ModelPrototype.initialize.callCount.should.equal(1);
 
       sinon.restore(ModelPrototype);
+    });
+  });
+
+  describe('when `throwJSONErrors` option is not provided', () => {
+    const Model = repository.Model.extend({ tableName: 'test' }, { jsonColumns: ['qux'] });
+
+    it('should throw an `SyntaxError` when fetching an invalid JSON value', async () => {
+      const [id] = await repository.knex('test').insert({ qux: 'qix' });
+
+      try {
+        await Model.forge({ id }).fetch();
+
+        should.fail();
+      } catch (e) {
+        e.should.be.an.instanceOf(SyntaxError);
+      }
+    });
+
+    it('should throw an `InvalidJSONError` when fetching an invalid JSON value and the `throwJSONErrors` option is provided as `true`', async () => {
+      const [id] = await repository.knex('test').insert({ qux: 'qix' });
+
+      try {
+        await Model.forge({ id }).fetch({ throwJSONErrors: true });
+
+        should.fail();
+      } catch (e) {
+        e.should.be.an.instanceOf(InvalidJSONError).with.properties({ value: 'qix' });
+      }
+    });
+  });
+
+  describe('when `throwJSONErrors` option is provided', () => {
+    const repository = bookshelf(knex(knexfile)).plugin(jsonColumns, { throwJSONErrors: true });
+    const Model = repository.Model.extend({ tableName: 'test' }, { jsonColumns: ['qux'] });
+
+    it('should throw an `InvalidJSONError` when fetching an invalid JSON value', async () => {
+      const [id] = await repository.knex('test').insert({ qux: 'qix' });
+
+      try {
+        await Model.forge({ id }).fetch();
+
+        should.fail();
+      } catch (e) {
+        e.should.be.an.instanceOf(InvalidJSONError).with.properties({ value: 'qix' });
+      }
+    });
+
+    it('should throw a `SyntaxError` when fetching an invalid JSON value and the `throwJSONErrors` option is provided as `false`', async () => {
+      const [id] = await repository.knex('test').insert({ qux: 'qix' });
+
+      try {
+        await Model.forge({ id }).fetch({ throwJSONErrors: false });
+
+        should.fail();
+      } catch (e) {
+        e.should.be.an.instanceOf(SyntaxError);
+      }
     });
   });
 });

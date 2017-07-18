@@ -1,55 +1,69 @@
 
 /**
- * Stringify JSON columns.
+ * Module dependencies.
  */
 
-function stringify(model, attributes, options) {
-  // Do not stringify with `patch` option.
-  if (options && options.patch) {
-    return;
-  }
-
-  // Mark json columns as stringfied.
-  options.parseJsonColumns = true;
-
-  this.constructor.jsonColumns.forEach(column => {
-    if (this.attributes[column]) {
-      this.attributes[column] = JSON.stringify(this.attributes[column]);
-    }
-  });
-}
-
-/**
- * Parse JSON columns.
- */
-
-function parse(model, response, options = {}) {
-  // Do not parse with `patch` option.
-  if (options.patch) {
-    return;
-  }
-
-  // Do not parse on `fetched` event after saving.
-  // eslint-disable-next-line no-underscore-dangle
-  if (!options.parseJsonColumns && options.query && options.query._method !== 'select') {
-    return;
-  }
-
-  this.constructor.jsonColumns.forEach(column => {
-    if (this.attributes[column]) {
-      this.attributes[column] = JSON.parse(this.attributes[column]);
-    }
-  });
-}
+import InvalidJSONError from './invalid-json-error';
 
 /**
  * Export `bookshelf-json-columns` plugin.
  */
 
-export default Bookshelf => {
+export default (Bookshelf, { throwJSONErrors } = {}) => {
   const Model = Bookshelf.Model.prototype;
   const client = Bookshelf.knex.client.config.client;
   const parseOnFetch = client === 'sqlite' || client === 'sqlite3' || client === 'mysql';
+
+  /**
+   * Stringify JSON columns.
+   */
+
+  function stringify(model, attributes, options) {
+    // Do not stringify with `patch` option.
+    if (options && options.patch) {
+      return;
+    }
+
+    // Mark json columns as stringfied.
+    options.parseJsonColumns = true;
+
+    this.constructor.jsonColumns.forEach(column => {
+      if (this.attributes[column]) {
+        this.attributes[column] = JSON.stringify(this.attributes[column]);
+      }
+    });
+  }
+
+  /**
+   * Parse JSON columns.
+   */
+
+  function parse(model, response, options = {}) {
+    // Do not parse with `patch` option.
+    if (options.patch) {
+      return;
+    }
+
+    // Do not parse on `fetched` event after saving.
+    // eslint-disable-next-line no-underscore-dangle
+    if (!options.parseJsonColumns && options.query && options.query._method !== 'select') {
+      return;
+    }
+
+    this.constructor.jsonColumns.forEach(column => {
+      if (this.attributes[column]) {
+        try {
+          this.attributes[column] = JSON.parse(this.attributes[column]);
+        } catch (e) {
+          throw options.throwJSONErrors === true || throwJSONErrors && options.throwJSONErrors !== false ? new InvalidJSONError({ value: this.attributes[column] }) : e;
+        }
+      }
+    });
+  }
+
+  /**
+   * Extend Model.
+   */
 
   Bookshelf.Model = Bookshelf.Model.extend({
     initialize() {
@@ -112,26 +126,28 @@ export default Bookshelf => {
     }
   });
 
-  if (!parseOnFetch) {
-    return;
-  }
+  /**
+   * Extend Collection.
+   */
 
-  const Collection = Bookshelf.Collection.prototype;
+  if (parseOnFetch) {
+    const Collection = Bookshelf.Collection.prototype;
 
-  Bookshelf.Collection = Bookshelf.Collection.extend({
-    initialize() {
-      if (!this.model.jsonColumns) {
+    Bookshelf.Collection = Bookshelf.Collection.extend({
+      initialize() {
+        if (!this.model.jsonColumns) {
+          return Collection.initialize.apply(this, arguments);
+        }
+
+        // Parse JSON columns after collection is fetched.
+        this.on('fetched', collection => {
+          collection.models.forEach(model => {
+            parse.apply(model);
+          });
+        });
+
         return Collection.initialize.apply(this, arguments);
       }
-
-      // Parse JSON columns after collection is fetched.
-      this.on('fetched', collection => {
-        collection.models.forEach(model => {
-          parse.apply(model);
-        });
-      });
-
-      return Collection.initialize.apply(this, arguments);
-    }
-  });
+    });
+  }
 };
