@@ -71,6 +71,30 @@ bookshelf.Model.extend({
 });
 ```
 
+### Options
+
+This plugin supports the following options:
+
+#### `throwJSONErrors`
+
+The `throwJSONErrors` option can be used to force the plugin to throw an [InvalidJSONError](/src/invalid-json-error.js) when an invalid JSON value is fetched:
+
+```js
+var bookshelf = require('bookshelf')(knex);
+var jsonColumns = require('bookshelf-json-columns');
+
+bookshelf.plugin(jsonColumns, {
+  throwJSONErrors: true
+});
+```
+
+If you pass this option when registering the plugin, the handling of JSON errors will be done in every `fetch` call. However, you can use it without registering by passing it to the `fetch` method, or even disable it if you did:
+
+```js
+Model.forge({ foo: 'bar' }).fetch({ throwJSONErrors: true });
+Model.forge({ foo: 'bar' }).fetch({ throwJSONErrors: false });
+```
+
 ## Contributing
 
 Contributions are welcome and greatly appreciated, so feel free to fork this repository and submit pull requests.  
