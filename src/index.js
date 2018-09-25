@@ -49,7 +49,7 @@ function parse(model, response, options = {}) {
 export default Bookshelf => {
   const Model = Bookshelf.Model.prototype;
   const client = Bookshelf.knex.client.config.client;
-  const supportsNativeJson = ['pg'];
+  const supportsNativeJson = ['postgres', 'pg'];
   // Parse if client does not natively support JSON column types
   const parseOnFetch = supportsNativeJson.indexOf(client) < 0;
 
