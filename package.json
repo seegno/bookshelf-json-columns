@@ -37,7 +37,7 @@
     "version": "sed -i '' 's/\\(\"version\": \"\\)'\"$npm_package_version\"'\\(\"\\)/\\1'\"$npm_config_release\"'\\2/' package.json"
   },
   "peerDependencies": {
-    "bookshelf": ">= 0.7"
+    "bookshelf": ">= 1"
   },
   "devDependencies": {
     "babel-cli": "6.18.0",
@@ -47,11 +47,11 @@
     "babel-preset-es2015-node": "4.0.2",
     "babel-preset-stage-3": "6.17.0",
     "babel-register": "6.18.0",
-    "bookshelf": "0.10.2",
+    "bookshelf": "1.0.1",
     "coveralls": "2.11.14",
     "eslint": "3.8.1",
     "eslint-config-seegno": "8.0.0",
-    "knex": "0.12.6",
+    "knex": "0.15.0",
     "mocha": "3.1.2",
     "mysql": "2.12.0",
     "nyc": "8.3.2",
@@ -62,7 +62,7 @@
     "sqlite3": "3.1.7"
   },
   "engines": {
-    "node": ">= 4"
+    "node": ">= 6"
   },
   "pre-commit": [
     "lint"

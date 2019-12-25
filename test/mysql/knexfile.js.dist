@@ -9,6 +9,7 @@ export default {
     charset: 'utf8',
     database: 'bookshelf-json-columns',
     host: 'localhost',
+    port: 3307,
     user: 'root'
   }
 };

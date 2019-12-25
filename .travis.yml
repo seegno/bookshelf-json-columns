@@ -1,21 +1,16 @@
+dist: bionic
+
 language: node_js
 
-services:
-  - mysql
-
-addons:
-  postgresql: "9.2"
-
 before_script:
+  - docker-compose up -d
   - cp test/mysql/knexfile.js.dist test/mysql/knexfile.js
   - cp test/postgres/knexfile.js.dist test/postgres/knexfile.js
   - cp test/sqlite/knexfile.js.dist test/sqlite/knexfile.js
-  - mysql -e "create database \`bookshelf-json-columns\`;" -uroot
-  - psql -U postgres -c 'create database "bookshelf-json-columns";'
+  - docker exec mysql mysql -e "create database \`bookshelf-json-columns\`;" -uroot
+  - docker exec postgres psql -U postgres -c 'create database "bookshelf-json-columns";'
 
 node_js:
-  - "4"
-  - "5"
   - "6"
   - "7"
 
