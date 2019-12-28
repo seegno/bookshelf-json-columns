@@ -111,7 +111,7 @@ describe('with PostgreSQL client', () => {
     it('should keep a null value on create', async () => {
       const model = await Model.forge().save();
 
-      should(model.get('foo')).be.undefined();
+      should(model.get('foo')).be.null();
     });
 
     it('should keep a JSON value on update', async () => {
@@ -127,7 +127,7 @@ describe('with PostgreSQL client', () => {
 
       await model.save();
 
-      should(model.get('foo')).be.undefined();
+      should(model.get('foo')).be.null();
     });
 
     it('should not stringify null values on update with `patch` option', async () => {

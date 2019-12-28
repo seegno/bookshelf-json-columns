@@ -1,0 +1,28 @@
+version: '2.3'
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+    ports:
+      - 5432:5432
+
+  mysql:
+    image: mariadb:10.3.13
+    container_name: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --execute \"SHOW DATABASES;\""
+    ports:
+      - 3307:3306
+
+  wait:
+    image: alpine
+    depends_on:
+      mysql:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
