@@ -1,6 +1,6 @@
 {
   "name": "bookshelf-json-columns",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Parse JSON columns with Bookshelf.js",
   "license": "MIT",
   "author": {
@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build": "rm -rf dist/* && ./node_modules/.bin/babel src/ --out-dir dist/",
-    "changelog": "github_changelog_generator --bug-labels --enhancement-labels --future-release=$npm_config_release --header-label='# Changelog'",
+    "changelog": "github_changelog_generator --user seegno --project bookshelf-json-columns --bug-labels --enhancement-labels --future-release=$npm_config_release --header-label='# Changelog'",
     "coveralls": "npm run cover && cat ./test/coverage/lcov.info | coveralls",
     "cover": "NODE_ENV=test nyc mocha $npm_package_options_mocha",
     "lint": "git diff --cached --name-only --diff-filter=ACMRTUXB | grep -E '\\.(js)(\\..+)?$' | xargs eslint",
